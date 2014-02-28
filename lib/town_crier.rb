@@ -23,4 +23,5 @@ module TownCrier
     def self.im?
       true # TODO: implement instant messenger check
     end
+  end
 end

@@ -1,4 +1,6 @@
+config/jabber.yml
 .bundle/
+Gemfile.lock
 .ruby-version
 .ruby-gemset
 log/*.log

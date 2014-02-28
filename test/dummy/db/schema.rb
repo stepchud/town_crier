@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140228045641) do
+ActiveRecord::Schema.define(version: 20140228074900) do
 
   create_table "events", force: true do |t|
     t.datetime "created_at"
@@ -27,6 +27,16 @@ ActiveRecord::Schema.define(version: 20140228045641) do
     t.string   "im"
     t.string   "twitter"
     t.string   "facebook"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "town_crier_messages", force: true do |t|
+    t.string   "proclamation"
+    t.string   "medium"
+    t.integer  "contact_id_id"
+    t.string   "status"
+    t.text     "formatted_text"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,0 +1,30 @@
+<%= form_for(@contact) do |f| %>
+  <% if @contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
+      <ul>
+      <% @contact.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <dl>
+    <dt>Name:</dt>
+    <dd><%= text_field(:contact, :name) %></dd>
+    <dt>Email:</dt>
+    <dd><%= text_field(:contact, :email) %></dd>
+    <dt>Mobile Phone:</dt>
+    <dd><%= text_field(:contact, :cell_number) %></dd>
+    <dt>Mobile Carrier:</dt>
+    <dd><%= carrier_select('contact["cell_carrier"]') %></dd>
+    <dt>Mobile Images (MMS)?</dt>
+    <dd><%= check_box(:contact, :cell_allows_mms) %></dd>
+    <dt>IM:</dt>
+    <dd><%= text_field(:contact, :im) %></dd>
+  </dl>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

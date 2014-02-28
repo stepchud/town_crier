@@ -1,0 +1,25 @@
+<h1>Listing proclamations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @proclamations.each do |proclamation| %>
+      <tr>
+        <td><%= link_to 'Show', proclamation %></td>
+        <td><%= link_to 'Edit', edit_proclamation_path(proclamation) %></td>
+        <td><%= link_to 'Destroy', proclamation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Proclamation', new_proclamation_path %>

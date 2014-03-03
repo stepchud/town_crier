@@ -1,0 +1,7 @@
+Enter your Contact info to receive a sample message:
+<%= form_for @contact, url: {controller: 'town_crier/contacts', action: 'create'} do |f| %>
+  <%= render 'town_crier/contacts/fields' %>
+  <%= text_field_tag 'sample_message', 'Oyez! Oyez! Hear ye a message from the Town Crier!' %>
+  <%= f.submit %>
+<% end %>
+<%= start_over %>

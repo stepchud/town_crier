@@ -1,6 +1,10 @@
 module TownCrier
   class Proclamation < ActiveRecord::Base
-    serialize :data, ::JSON
+    serialize :options, ::JSON
+
+    has_many :messages
+
+    after_create :announce_later
 
     ##
     # Proclamation format for lifecycle events:
@@ -12,10 +16,10 @@ module TownCrier
     # options:
     # to: array or scope of Contacts
     # via: array of media to distribute the message through
-    def self.announce(proclamation, options={})
-      crowd = options.delete(:to)  || TownCrier::Contact.interested_in(proclamation)
+    def self.announce(proclamation)
+      crowd = options[:to] || TownCrier::Contact.interested_in(proclamation)
       crowd = TownCrier::Contact.all if crowd==:all
-      media = options.delete(:via) || TownCrier::Medium.available_for(proclamation)
+      media = options[:via] || TownCrier::Medium.available.include?(proclamation)
       crowd.each do |contact|
         media.each do |medium|
           if contact.reachable_by?(medium)
@@ -23,6 +27,15 @@ module TownCrier
             message.deliver(options)
           end
         end
+      end
+    end
+
+    private
+    # Create a thread to deliver the messages later
+    def announce_later
+      logger.info("Proclamation#announce_later")
+      Thread.new do
+        Proclamation.announce(self)
       end
     end
   end

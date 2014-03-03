@@ -11,7 +11,18 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <dl>
+    <dt>Recipient:</dt>
+    <dd><%= contacts_select f %></dd>
+    <dt>Message text:</dt>
+    <dd><%= f.text_area :full_text, cols: 50, rows: 10 %></dd>
+    <dt>Send via:</dt>
+    <dd><%= check_box_tag 'proclamation[options][via][]', 'email' %> Email</dd>
+    <dd><%= check_box_tag 'proclamation[options][via][]', 'text' %> Text</dd>
+    <dd><%= check_box_tag 'proclamation[options][via][]', 'im' %> Instant Message</dd>
+  </dl>
+
+  <dl class="actions">
+    <dd><%= f.submit 'Send' %></dd>
+  </dl>
 <% end %>

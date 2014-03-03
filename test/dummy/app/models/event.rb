@@ -1,3 +1,3 @@
 class Event < ActiveRecord::Base
-  proclaims :create
+  acts_as_town_crier
 end

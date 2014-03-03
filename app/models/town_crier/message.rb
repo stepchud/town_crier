@@ -1,10 +1,13 @@
 module TownCrier
   class Message < ActiveRecord::Base
-    belongs_to :contact
+    # STATUSES
     New = :new
     Pending = :pending
     Delivered = :delivered
     Failed = :failed
+
+    belongs_to :contact
+    belongs_to :proclamation
 
     before_create :set_new_status
 

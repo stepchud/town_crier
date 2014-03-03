@@ -43,7 +43,8 @@ ActiveRecord::Schema.define(version: 20140228074900) do
 
   create_table "town_crier_proclamations", force: true do |t|
     t.string   "title"
-    t.text     "data"
+    t.text     "full_text"
+    t.text     "options"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

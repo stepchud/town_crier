@@ -3,6 +3,8 @@ module TownCrier
     cattr_accessor :contactable # class which models Users in the mounted Rails app
 
     validates_presence_of :name
+    validates_uniqueness_of :name
+
     def reachable_by?(medium)
       case medium.to_sym
       when :email

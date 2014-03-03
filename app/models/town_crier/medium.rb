@@ -16,7 +16,7 @@ module TownCrier
 
     # checks if an email address is configured
     def self.email?
-      true # TODO: implement email check
+      ActionMailer::Base.smtp_settings.present?
     end
 
     def self.mobile_push?
@@ -29,11 +29,13 @@ module TownCrier
 
     class Email
       def self.transmit contact, text
+        SampleMailer.sample_mail({contact: contact, text: text}).deliver
       end
     end
 
     class Sms
       def self.transmit contact, text
+        sms_client = SMSFu::Client.new
         SMSFu.deliver(contact.cell_number, contact.cell_carrier, text)
       end
     end

@@ -11,3 +11,17 @@
  *= require_self
  *= require_tree .
  */
+dl {
+  $term-width: 190px;
+  dt {
+    float: left;
+    width: $term-width;
+    text-align: right;
+  }
+  dd {
+    margin-left: $term-width + 10px;
+  }
+  dd div.field_with_errors {
+    display: inline;
+  }
+}

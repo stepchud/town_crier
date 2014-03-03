@@ -15,6 +15,7 @@ module TownCrier
 
     # GET /contacts/new
     def new
+      session.delete(:current_contact)
       @contact = Contact.new
     end
 
@@ -27,7 +28,9 @@ module TownCrier
       @contact = Contact.new(contact_params)
 
       if @contact.save
-        redirect_to @contact, notice: 'Contact was successfully created.'
+        session[:current_contact] = @contact.id
+        @message = Message.new
+        redirect_to @message, notice: 'Contact info saved.'
       else
         render action: 'new'
       end
@@ -36,7 +39,7 @@ module TownCrier
     # PATCH/PUT /contacts/1
     def update
       if @contact.update(contact_params)
-        redirect_to @contact, notice: 'Contact was successfully updated.'
+        redirect_to @contact, notice: 'Contact was updated.'
       else
         render action: 'edit'
       end
@@ -45,7 +48,7 @@ module TownCrier
     # DELETE /contacts/1
     def destroy
       @contact.destroy
-      redirect_to contacts_url, notice: 'Contact was successfully destroyed.'
+      redirect_to contacts_url, notice: 'Contact was destroyed.'
     end
 
     private

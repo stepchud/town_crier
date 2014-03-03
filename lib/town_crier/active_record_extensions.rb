@@ -12,16 +12,16 @@ module ClassMethods
   # This model makes proclamations about lifecycle events
   #
   def acts_as_town_crier(*args)
-    after_create(:model_create) if args.include?(:create)
-    after_update(:model_update) if args.include?(:update)
-    after_destroy(:model_destroy) if args.include?(:destroy)
+    after_create(:model_create)   if args.empty? || args.include?(:create)
+    after_update(:model_update)   if args.empty? || args.include?(:update)
+    after_destroy(:model_destroy) if args.empty? || args.include?(:destroy)
   end
 
   ##
   # This is a "User" type object that can be sent messages
   # TownCrier::Contact has a reference to a contactable instance
   def town_ctrier_contactable
-    TownCrier.contactable_type=self.class
+    TownCrier::Contact.contactable=self.class
   end
 end
 

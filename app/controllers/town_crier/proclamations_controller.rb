@@ -3,28 +3,17 @@ require_dependency "town_crier/application_controller"
 module TownCrier
   class ProclamationsController < ApplicationController
     before_action :set_proclamation, only: [:show, :edit, :update, :destroy]
-
-    # GET /proclamations
-    def index
-      @proclamations = Proclamation.all
-    end
-
-    # GET /proclamations/1
-    def show
-    end
+    before_action :set_contact, only: [:new, :create]
 
     # GET /proclamations/new
     def new
       @proclamation = Proclamation.new
     end
 
-    # GET /proclamations/1/edit
-    def edit
-    end
-
     # POST /proclamations
     def create
       @proclamation = Proclamation.new(proclamation_params)
+      logger.info("proclamation options=#{proclamation_params[:options]}")
 
       if @proclamation.save
         redirect_to @proclamation, notice: 'Proclamation was successfully created.'
@@ -33,30 +22,19 @@ module TownCrier
       end
     end
 
-    # PATCH/PUT /proclamations/1
-    def update
-      if @proclamation.update(proclamation_params)
-        redirect_to @proclamation, notice: 'Proclamation was successfully updated.'
-      else
-        render action: 'edit'
-      end
-    end
-
-    # DELETE /proclamations/1
-    def destroy
-      @proclamation.destroy
-      redirect_to proclamations_url, notice: 'Proclamation was successfully destroyed.'
-    end
-
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_proclamation
         @proclamation = Proclamation.find(params[:id])
       end
 
+      def set_contact
+        @contact = session[:current_contact] ? Contact.find(session[:current_contact]) : Contact.first
+      end
+
       # Only allow a trusted parameter "white list" through.
       def proclamation_params
-        params[:proclamation]
+        params[:proclamation].permit(:full_text, {:options => [:to, :via]})
       end
   end
 end

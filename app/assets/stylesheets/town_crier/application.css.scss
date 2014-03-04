@@ -11,17 +11,48 @@
  *= require_self
  *= require_tree .
  */
+
+$font-family-serif: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+$font-family-base: $font-family-serif;
+@import "bootstrap";
+
+body {
+  background-image: url('oldp1.png');
+  background-repeat: no-repeat;
+  background-color: #85543c;
+  background-size:500px 800px;
+}
+
+.town-crier-main {
+  padding-top: 180px;
+  padding-left: 100px;
+  width: 400px;
+  height: 800px;
+}
+
 dl {
-  $term-width: 190px;
   dt {
     float: left;
-    width: $term-width;
-    text-align: right;
+    text-align: left;
+    padding-left: 20px;
   }
   dd {
-    margin-left: $term-width + 10px;
+    margin-left: 90px;
+    clear: left;
+  }
+  dd.textarea {
+    margin-left: 20px;
   }
   dd div.field_with_errors {
     display: inline;
   }
+}
+input[type="submit"] {
+  font-size: large;
+}
+p.restart {
+  position: absolute;
+  top: 670px;
+  left: 190px;
+  font-size: large;
 }

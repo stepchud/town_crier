@@ -17,7 +17,7 @@
   <dt>Mobile Phone:</dt>
   <dd><%= text_field(:contact, :cell_number) %></dd>
   <dt>Mobile Carrier:</dt>
-  <dd><%= carrier_select('contact["cell_carrier"]') %></dd>
+  <dd><%= carrier_select('contact[cell_carrier]', 'Select your carrier', @contact.cell_carrier) %></dd>
   <dt>Mobile Images (MMS)?</dt>
   <dd><%= check_box(:contact, :cell_allows_mms) %></dd>
   <dt>IM:</dt>

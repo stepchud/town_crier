@@ -1,4 +1,12 @@
-<p id="notice"><%= notice %></p>
+<div class="proc-sent">
+  <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_proclamation_path(@proclamation) %> |
-<%= link_to 'Back', proclamations_path %>
+  <p>Thou message reached:</p>
+  <p><%= list_recipients %></p>
+  <p>Via: <%= list_media %></p>
+
+  <p>Thank thee, Lord,<br>
+     for thine patience.</p>
+  <p>Hast thou another message?</p>
+  <%= start_over %>
+</div>

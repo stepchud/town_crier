@@ -32,17 +32,18 @@ ActiveRecord::Schema.define(version: 20140228074900) do
   end
 
   create_table "town_crier_messages", force: true do |t|
-    t.string   "proclamation"
-    t.string   "medium"
-    t.integer  "contact_id_id"
     t.string   "status"
-    t.text     "formatted_text"
+    t.string   "status_message"
+    t.string   "medium"
+    t.integer  "proclamation_id"
+    t.integer  "contact_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "town_crier_proclamations", force: true do |t|
     t.string   "title"
+    t.integer  "from_id"
     t.text     "full_text"
     t.text     "options"
     t.datetime "created_at"

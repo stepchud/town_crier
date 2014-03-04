@@ -14,7 +14,7 @@
       <tr>
         <td><%= link_to 'Show', proclamation %></td>
         <td><%= link_to 'Edit', edit_proclamation_path(proclamation) %></td>
-        <td><%= link_to 'Destroy', proclamation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', proclamation, confirm: 'Are you sure?', method: :delete %></td>
       </tr>
     <% end %>
   </tbody>

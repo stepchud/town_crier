@@ -1,7 +1,7 @@
 module TownCrier
   class Message < ActiveRecord::Base
     # STATUSES
-    New = :new
+    Created = :new
     Pending = :pending
     Delivered = :delivered
     Failed = :failed
@@ -9,29 +9,34 @@ module TownCrier
     belongs_to :contact
     belongs_to :proclamation
 
-    before_create :set_new_status
+    before_create :initialize_status
 
-    def deliver(options)
-      text = options[:text] || generate(proclamation)
-      medium = Medium.get(via)
+    def deliver
+      medium = Medium.get_type(self.medium)
+      text = proclamation.full_text ||
+             generate_message_for(proclamation, medium)
       begin
-        update_attributes!(formatted_text: format(text), status: Pending)
-        medium.transmit(contact, formatted_text)
-        update_status(Delivered)
+        set_status(Pending)
+        medium.transmit(contact, text)
+        set_status(Delivered)
       rescue
-        update_status(Failed)
+        update_attributes(status: Failed, status_message: $!.to_s)
       end
-    end
-
-    def update_status(status)
-      update_attributes(status: status)
     end
 
     private
-    def set_new_status
-      if status.nil?
-        self.status = New
-      end
+    def initialize_status
+      self.status = Created if status.nil?
+    end
+
+    def set_status(status)
+      update_attribute(:status, status)
+    end
+
+    ##
+    # TODO: implement custom formatters for object lifecycle events / media
+    def generate_message_for(proclamation, medium)
+      "Hear Ye! An event transpired at #{proclamation.created_at}:\n\n#{proclamation.title}"
     end
   end
 end

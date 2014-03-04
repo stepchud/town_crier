@@ -17,8 +17,14 @@ Dummy::Application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'qmailq.spice.spiceworks.com',
-    port:                 25
+    # address:              'qmailq.spice.spiceworks.com',
+    # port:                 25
+    address:              'smtp.gmail.com',
+    port:                 587,
+    user_name:            'tester.name123@gmail.com',
+    password:             'L1lP3pp3r',
+    authentication:       'plain',
+    enable_starttls_auto: true
   }
 
   # Print deprecation notices to the Rails logger.

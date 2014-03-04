@@ -11,7 +11,6 @@ gemspec
 # your gem to rubygems.org.
 
 # To use debugger
-gem 'debugger'
 gem 'sms_fu', :git=>"git://github.com/stepchud/sms-fu.git"
-gem 'sass-rails'
-gem 'bootstrap-sass'
+gem 'sass-rails', '>= 3.2'
+gem 'bootstrap-sass', '~> 3.1.1'

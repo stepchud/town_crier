@@ -5,6 +5,10 @@ module TownCrier
     before_action :set_proclamation, only: [:show, :edit, :update, :destroy]
     before_action :set_contact, only: [:new, :create]
 
+    def index
+      @proclamations = Proclamation.all
+    end
+
     # GET /proclamations/new
     def new
       @proclamation = Proclamation.new
@@ -13,13 +17,17 @@ module TownCrier
     # POST /proclamations
     def create
       @proclamation = Proclamation.new(proclamation_params)
-      logger.info("proclamation options=#{proclamation_params[:options]}")
-
+      @proclamation.from_id = session[:current_contact]
       if @proclamation.save
-        redirect_to @proclamation, notice: 'Proclamation was successfully created.'
+        redirect_to @proclamation, notice: 'Thy proclamation was made!'
       else
         render action: 'new'
       end
+    end
+
+    def destroy
+      @proclamation.destroy
+      redirect_to proclamations_url, "Thou proclamation is no more."
     end
 
     private
@@ -34,7 +42,7 @@ module TownCrier
 
       # Only allow a trusted parameter "white list" through.
       def proclamation_params
-        params[:proclamation].permit(:full_text, {:options => [:to, :via]})
+        params[:proclamation].permit(:full_text, :options=>[:to, :via=>[]])
       end
   end
 end

@@ -29,8 +29,7 @@ module TownCrier
 
       if @contact.save
         session[:current_contact] = @contact.id
-        @message = Message.new
-        redirect_to @message, notice: 'Contact info saved.'
+        redirect_to new_proclamation_path, notice: 'Contact info saved.'
       else
         render action: 'new'
       end

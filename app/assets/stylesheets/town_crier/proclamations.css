@@ -2,3 +2,13 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+.proc-sent {
+  font-size: medium;
+}
+.proc-sent p.restart {
+    position: absolute;
+    top: 370px;
+    left: 190px;
+    font-size: large;
+  }
+}

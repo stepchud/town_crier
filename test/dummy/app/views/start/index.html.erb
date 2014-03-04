@@ -1,10 +1,14 @@
-<%= image_tag "towncrier.png", :size=>'400x400' %>
-<h1>Town Crier</h1>
-<h3>Message Users By:</h3>
-<ul>
-  <li>Email</li>
-  <li>Text (SMS/MMS)</li>
-  <li>Instant Message</li>
-  <li>Mobile Push (coming soon)</li>
-</ul>
-<div><a href="/town_crier/contacts/new">Announce a Proclamation!</a></div>
+<a href="/town_crier/contacts/new">
+  <%= image_tag "towncrier.png", :size=>'400x400', :title=>'Announce a Proclamation!' %>
+</a>
+<div class="welcome">
+  <h1>The Town Crier</h1>
+  <h2>Notifies users by:</h2>
+  <ul>
+    <li>Email</li>
+    <li>Text (SMS/MMS)</li>
+    <li>Instant Message</li>
+    <li>*coming soon* Mobile Push</li>
+  </ul>
+  <h3>Now go forth and<br /><a href="/town_crier/contacts/new">Make a Proclamation!</a></h3>
+</div>
